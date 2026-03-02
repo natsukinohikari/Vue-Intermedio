@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import TaskInput from './components/TaskInput.vue'
 
 const listaTareas = ref([])
@@ -14,6 +14,16 @@ function agregarTareaHijo(tarea) {
 function borrarTarea(indice) {
   listaTareas.value.splice(indice, 1)
 }
+
+onMounted(() => {
+  const datos = localStorage.getItem('tareas')
+
+  if (datos) listaTareas.value = JSON.parse(datos)
+})
+
+watch(listaTareas, (nuevasTareas) => {
+  localStorage.setItem('tareas', JSON.stringify(nuevasTareas))
+}, { deep: true })
 </script>
 
 <template>
