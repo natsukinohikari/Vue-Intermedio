@@ -1,9 +1,11 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import TaskInput from './components/TaskInput.vue'
+import { useCounter } from './composables/useCounter'
 
 const listaTareas = ref([])
 const tarea = ref('')
+const { contador, incrementar, decrementar } = useCounter()
 
 function agregarTareaHijo(tarea) {
   listaTareas.value.push({
@@ -30,6 +32,9 @@ watch(listaTareas, (nuevasTareas) => {
 <template>
 
   <main>
+    <h2>El valor del contador a través de composables es {{ contador }} </h2>
+    <button @click="incrementar">+</button>
+    <button @click="decrementar">-</button>
     <p>La tarea a añadir es: {{ tarea }}</p>
     <TaskInput v-model:tarea="tarea" @anadir-tarea="agregarTareaHijo"/>
 
