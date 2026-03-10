@@ -3,6 +3,7 @@ import { ref, watch, onMounted } from 'vue'
 import TaskInput from './components/TaskInput.vue'
 
 const listaTareas = ref([])
+const tarea = ref('')
 
 function agregarTareaHijo(tarea) {
   listaTareas.value.push({
@@ -29,7 +30,8 @@ watch(listaTareas, (nuevasTareas) => {
 <template>
 
   <main>
-    <TaskInput @anadir-tarea="agregarTareaHijo"/>
+    <p>La tarea a añadir es: {{ tarea }}</p>
+    <TaskInput v-model:tarea="tarea" @anadir-tarea="agregarTareaHijo"/>
 
     <ul v-if="listaTareas.length > 0" >
       <li v-for="(tarea, indice) in listaTareas" :key="tarea.id">

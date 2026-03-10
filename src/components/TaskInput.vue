@@ -1,17 +1,19 @@
 <script setup>
-import { ref } from 'vue'
 
-const tarea = ref('')
-const emit = defineEmits(['anadir-tarea'])
+const props = defineProps({
+    tarea: String
+})
+
+const emit = defineEmits(['update:tarea', 'anadir-tarea'])
 
 function anadirTarea() {
-    if (tarea.value.trim() == '') return
-    emit('anadir-tarea', tarea.value)
-    tarea.value = ""
+    if (props.tarea.trim() == '') return
+    emit('anadir-tarea', props.tarea)
+    emit('update:tarea', '')
 }
 </script>
 
 <template>
-    <input type="text" v-model="tarea" placeholder="Escribe la tarea a enviar al padre"/>
+    <input type="text" :value="props.tarea" @input="emit('update:tarea', $event.target.value)" placeholder="Escribe la tarea a enviar al padre"/>
     <button @click="anadirTarea">AÑADIR TAREA</button>
 </template>
