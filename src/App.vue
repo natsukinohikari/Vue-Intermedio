@@ -1,32 +1,13 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref } from 'vue'
 import TaskInput from './components/TaskInput.vue'
 import { useCounter } from './composables/useCounter'
+import { useTasks } from './composables/useTasks'
 
-const listaTareas = ref([])
+
 const tarea = ref('')
 const { contador, incrementar, decrementar } = useCounter()
-
-function agregarTareaHijo(tarea) {
-  listaTareas.value.push({
-    id: Date.now(),
-    texto: tarea
-  })
-}
-
-function borrarTarea(indice) {
-  listaTareas.value.splice(indice, 1)
-}
-
-onMounted(() => {
-  const datos = localStorage.getItem('tareas')
-
-  if (datos) listaTareas.value = JSON.parse(datos)
-})
-
-watch(listaTareas, (nuevasTareas) => {
-  localStorage.setItem('tareas', JSON.stringify(nuevasTareas))
-}, { deep: true })
+const { listaTareas, agregarTarea, borrarTarea } = useTasks()
 </script>
 
 <template>
@@ -36,11 +17,11 @@ watch(listaTareas, (nuevasTareas) => {
     <button @click="incrementar">+</button>
     <button @click="decrementar">-</button>
     <p>La tarea a añadir es: {{ tarea }}</p>
-    <TaskInput v-model:tarea="tarea" @anadir-tarea="agregarTareaHijo"/>
+    <TaskInput v-model:tarea="tarea" @anadir-tarea="agregarTarea"/>
 
     <ul v-if="listaTareas.length > 0" >
-      <li v-for="(tarea, indice) in listaTareas" :key="tarea.id">
-        {{ tarea.texto }}
+      <li v-for="(item, indice) in listaTareas" :key="item.id">
+        {{ item.texto }}
         <button @click="borrarTarea(indice)">BORRAR TAREA</button>
       </li>
     </ul>
