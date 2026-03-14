@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import TaskInput from './components/TaskInput.vue'
+import TaskList from './components/TaskList.vue'
 import { useCounter } from './composables/useCounter'
 import { useTasks } from './composables/useTasks'
 
@@ -20,10 +21,7 @@ const { listaTareas, agregarTarea, borrarTarea } = useTasks()
     <TaskInput v-model:tarea="tarea" @anadir-tarea="agregarTarea"/>
 
     <ul v-if="listaTareas.length > 0" >
-      <li v-for="(item, indice) in listaTareas" :key="item.id">
-        {{ item.texto }}
-        <button @click="borrarTarea(indice)">BORRAR TAREA</button>
-      </li>
+      <TaskList :listaTareas="listaTareas" @borrar-tarea="borrarTarea"/>
     </ul>
 
     <p v-else>No hay tareas para mostrar</p>
