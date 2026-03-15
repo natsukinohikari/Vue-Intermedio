@@ -1,44 +1,11 @@
 # vue-intermedio
 
-This template should help get you started developing with Vue 3 in Vite.
+En este proyecto vamos a tocar temas un poco más profundos de Vue tales como:
 
-## Recommended IDE Setup
-
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Recommended Browser Setup
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- Separación en diversos componentes para encapsulamiento de código y legibilidad
+- Separar la lógica de la interfaz (UI) a través de composables
+- Uso de emits para una comunicación bidireccional entre padres e hijos ya que los props son de solo lectura por los hijos. De esta manera se puede indicar al padre que haga algo desde el hijo
+- Control de ciclos de vida con onMounted en este caso
+- Uso de watch para la observación de cambios en propiedades reactivas y realizar lo que queremos debido a ese cambio. Con el atributo deep hacemos que observe dentro de la variable, como el caso de objetos o arrays, sin tener que cambiar el array u objeto en sí mismos
+- Uso de v-model para con inputs, textarea, selects, checkbox, y asentamiento de la diferencia de uso entre v-model:nombreAPasar="variable" y :nombreAPasar="variable"
+- Slots. Su uso es con #nombre que al cambio es lo mismo que v-slot:nombre. Solo funciona en "<template>" y componentes. Si no se nombran, pillan valores por defecto y no es necesario el uso de <template> en estos casos en el padre. Sirven para componentes reutilizables también

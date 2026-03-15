@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import TaskInput from './components/TaskInput.vue'
 import TaskList from './components/TaskList.vue'
+import Panel from './components/Panel.vue'
 import { useCounter } from './composables/useCounter'
 import { useTasks } from './composables/useTasks'
 
@@ -25,6 +26,16 @@ const { listaTareas, agregarTarea, borrarTarea } = useTasks()
     </ul>
 
     <p v-else>No hay tareas para mostrar</p>
+
+    <Panel>
+      <template #titulo>
+        Mi panel
+      </template>
+      <p>Contenido del panel</p>
+      <template #botones>
+        <button>Guardar</button>
+      </template>
+    </Panel>
   </main>
 </template>
 
