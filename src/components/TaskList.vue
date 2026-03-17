@@ -1,9 +1,8 @@
 <script setup>
+import { inject } from 'vue';
 import TaskItem from './TaskItem.vue';
 
-defineProps({
-    listaTareas: Array
-})
+const listaTareas = inject("listaTareas")
 
 const emit = defineEmits(['borrar-tarea'])
 </script>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { provide, ref } from 'vue'
 import TaskInput from './components/TaskInput.vue'
 import TaskList from './components/TaskList.vue'
 import Panel from './components/Panel.vue'
@@ -10,6 +10,7 @@ import { useTasks } from './composables/useTasks'
 const tarea = ref('')
 const { contador, incrementar, decrementar } = useCounter()
 const { listaTareas, agregarTarea, borrarTarea } = useTasks()
+provide("listaTareas", listaTareas)
 </script>
 
 <template>
@@ -22,7 +23,7 @@ const { listaTareas, agregarTarea, borrarTarea } = useTasks()
     <TaskInput v-model:tarea="tarea" @anadir-tarea="agregarTarea"/>
 
     <ul v-if="listaTareas.length > 0" >
-      <TaskList :listaTareas="listaTareas" @borrar-tarea="borrarTarea"/>
+      <TaskList @borrar-tarea="borrarTarea"/>
     </ul>
 
     <p v-else>No hay tareas para mostrar</p>
