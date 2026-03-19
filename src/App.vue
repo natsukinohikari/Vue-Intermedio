@@ -3,13 +3,16 @@ import { provide, ref } from 'vue'
 import TaskInput from './components/TaskInput.vue'
 import TaskList from './components/TaskList.vue'
 import Panel from './components/Panel.vue'
+import Modal from './components/Modals.vue'
 import { useCounter } from './composables/useCounter'
 import { useTasks } from './composables/useTasks'
+import { useModal } from './composables/useModal'
 
 
 const tarea = ref('')
 const { contador, incrementar, decrementar } = useCounter()
 const { listaTareas, agregarTarea, borrarTarea } = useTasks()
+const { mostrarModal, mostrar } = useModal()
 provide("listaTareas", listaTareas)
 </script>
 
@@ -37,6 +40,11 @@ provide("listaTareas", listaTareas)
         <button>Guardar</button>
       </template>
     </Panel>
+
+    <button v-if="!mostrarModal" @click="mostrar">Abrir modal</button>
+    <Modal :mostrarModal="mostrarModal" @cerrar-modal="mostrar">
+      <h3>Esto proviene gracias al teleport</h3>
+    </Modal>
   </main>
 </template>
 

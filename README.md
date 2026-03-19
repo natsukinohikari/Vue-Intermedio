@@ -11,7 +11,7 @@ En este proyecto vamos a tocar temas un poco más profundos de Vue tales como:
 - Slots. Su uso es con #nombre que al cambio es lo mismo que v-slot:nombre. Solo funciona en "<template>" y componentes. Si no se nombran, pillan valores por defecto y no es necesario el uso de <template> en estos casos en el padre. Sirven para componentes reutilizables también
 - Los scoped slots son prácticamente lo mismo que los slots solo que los hijos pasan datos al padre para que decida cómo renderizarlos. Ejemplo más abajo con datalist como hijo y app como padre.
 - Uso de provide e inject que facilita el hecho de compartir datos (variables, funciones...) que son usados por sus descendientes a cualquier nivel sin importar si es hijo directo o no. Ante su uso ya no se emplearían los props, mejorando la legibilidad y facilidad de lectura porque se evitaría el prop drilling. Acepta elementos reactivos y no reactivos. Se usa también para estilos globales
-
+- Utilización de teleport para mostrar información en otra parte distinta del DOM de la misma página respecto al código. Pueden usarse etiquetas o identificadores para especificar dónde se quiere que se refleje. Sirve para modales, tooltips, dropdowns... Recordar que SOLO funciona en la misma página
 
 
 Prop drilling: si quisiera usar "agua" en el padre e hijo de un componente bisabuelo, no necesitaria pasar "agua" al abuelo, después de este al padre y luego del padre al hijo, sino que permite compartir directamente el dato del bisabuelo al padre e hijo. Bisabuelo->Abuelo->Padre->Hijo (prop drilling)
